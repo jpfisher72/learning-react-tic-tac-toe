@@ -6,6 +6,7 @@ import { calculateWinner } from './helpers';
 // React Hooks
 export default function Board() {
   // useState
+  // Q - does squares hold the current state of the board?
   const [ squares, setSquares ] = useState(Array(9).fill(null));
   const [ winner, setWinner ] = useState(null);
   const [ xIsNext, setXIsNext ] = useState(true);
@@ -22,13 +23,15 @@ export default function Board() {
 
   const renderSquare = (i) => {
     return <Square
+    //These are the props are passed to the square button
       value={squares[i]} 
       onClick={() => handleClick(i)} />
   };
 
   return (
     <div>
-      <div className="status" onClick={() => setSquares("X")}>{status}</div>
+      {/* <div className="status" onClick={() => setSquares("X")}>{status}</div> */}
+      <div className="status">{`Next player: ${xIsNext ? 'X' : 'O'}`}</div>
       {
         winner ? <Banner name={winner} /> : null
       }
@@ -55,7 +58,9 @@ export default function Board() {
  * CLASS VERSION OF THE BOARD COMPONENT
  */
 
-// class Board extends React.Component {
+ //Note: Had to add "export default" for build to succeed
+
+// export default class Board extends React.Component {
 //   constructor(props) {
 //     super(props);
 
